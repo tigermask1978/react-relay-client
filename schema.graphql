@@ -1,0 +1,88 @@
+input AddBookInput {
+  name: String!
+  desc: String
+  pages: Int
+  clientMutationId: String
+}
+
+type AddBookPayload {
+  retNode: BookNode
+  clientMutationId: String
+}
+
+type BookNode implements Node {
+  """The ID of the object."""
+  id: ID!
+  name: String!
+  desc: String
+  pages: Int
+}
+
+type BookNodeConnection {
+  pageInfo: PageInfo!
+  edges: [BookNodeEdge]!
+}
+
+type BookNodeEdge {
+  """The item at the end of the edge"""
+  node: BookNode
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+input ModifyBookInput {
+  id: String!
+  name: String!
+  desc: String
+  pages: Int
+  clientMutationId: String
+}
+
+type ModifyBookPayload {
+  retNode: BookNode
+  clientMutationId: String
+}
+
+type Mutation {
+  addBook(input: AddBookInput!): AddBookPayload
+  removeBook(input: RemoveBookInput!): RemoveBookPayload
+  modifyBook(input: ModifyBookInput!): ModifyBookPayload
+}
+
+"""An object with an ID"""
+interface Node {
+  """The ID of the object."""
+  id: ID!
+}
+
+type PageInfo {
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
+
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+}
+
+type Query {
+  """The ID of the object"""
+  book(id: ID!): BookNode
+  allBooks(searchTerm: String, before: String, after: String, first: Int, last: Int, name: String, desc: String, pages: Float): BookNodeConnection
+}
+
+input RemoveBookInput {
+  id: String!
+  clientMutationId: String
+}
+
+type RemoveBookPayload {
+  retNode: BookNode
+  clientMutationId: String
+}
+
