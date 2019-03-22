@@ -7,7 +7,9 @@ function fetchQuery(operation, variables) {
     method: "POST",
     headers: {
       Accept: "application/json",
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
+      Authorization:
+        "JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6InRpZ2VybWFzayIsImV4cCI6MTU1MzE1Mzk0NSwib3JpZ0lhdCI6MTU1MzE1MzY0NX0.3TFX6LYhpxgbeXN8O_N1X0qVprBf0Foc3thLgdyZxpc"
     },
     body: JSON.stringify({
       query: operation.text,
